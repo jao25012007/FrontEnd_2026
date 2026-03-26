@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Pet Virtual</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body style="
+    background-image: url('fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+">
+
+    <!-- Container principal -->
+    <div class="flex flex-col items-center justify-center min-h-screen gap-6">
+
+        <!-- Bichinho -->
+        <img id="b"
+            src="b_n.png"
+            alt="Bichinho"
+            class="w-400 h-auto" />
+
+        <!-- Imagem principal -->
+        <img id="mainImage"
+            src="cria_norm.png"
+            alt="Imagem principal"
+            class="w-500 max-w-md h-auto" />
+
+        <!-- Botões -->
+        <div class="flex gap-4 justify-center items-center">
+
+            <!-- Botão extra (se quiser usar) -->
+            <img id="btn"
+                src="btn.png"
+                alt="Outro botão"
+                class="w-300 h-auto cursor-pointer active:scale-95 transition" />
+
+            <!-- Botão alimentar -->
+            <img id="btnAlimentar"
+                src="btn_frut.png"
+                alt="Alimentar"
+                class="w-300 h-auto cursor-pointer active:scale-95 transition"
+                onclick="alimentar()" />
+            
+            <img src="ferlini.jpeg"/>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
