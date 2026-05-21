@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinity Bank</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #141e30, #243b55);
+    }
+
+    .container {
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #243b55;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #243b55;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #141e30;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f4f4f4;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Infinity Bank</h1>
+
+    <select id="bandeira">
+      <option value="">Selecione a bandeira</option>
+      <option value="visa">Visa</option>
+      <option value="master">Master</option>
+      <option value="elo">Elo</option>
+    </select>
+
+    <input 
+      type="number" 
+      id="valor" 
+      placeholder="Valor da venda"
+      step="0.01"
+    >
+
+    <input 
+      type="number" 
+      id="parcelas" 
+      placeholder="Quantidade de parcelas"
+    >
+
+    <button id="calcular">
+      Calcular Venda
+    </button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const botao = document.getElementById("calcular");
+
+    botao.addEventListener("click", () => {
+
+      const bandeira = document.getElementById("bandeira").value;
+      const valor = Number(document.getElementById("valor").value);
+      const parcelas = Number(document.getElementById("parcelas").value);
+
+      const resultado = document.getElementById("resultado");
+
+      let taxaPercentual = 0;
+
+      // Taxa da bandeira
+      switch (bandeira) {
+
+        case "visa":
+          taxaPercentual = 0.02;
+          break;
+
+        case "master":
+          taxaPercentual = 0.0185;
+          break;
+
+        case "elo":
+          taxaPercentual = 0.03;
+          break;
+
+        default:
+          resultado.innerHTML = "Selecione uma bandeira válida!";
+          return;
+      }
+
+      // Taxa da bandeira
+      const taxaBandeira = valor * taxaPercentual;
+
+      // Juros simples
+      const juros = valor * (0.015 * parcelas);
+
+      // Taxa fixa mensal
+      const taxaMensal = parcelas * 12.50;
+
+      // Valor total
+      const valorTotal = valor + taxaBandeira + juros + taxaMensal;
+
+      // Valor de cada parcela
+      const valorParcela = valorTotal / parcelas;
+
+      resultado.innerHTML = `
+        <strong>Resumo da Venda</strong><br><br>
+
+        Valor da Venda: R$ ${valor.toFixed(2)} <br>
+
+        Taxa da Bandeira: R$ ${taxaBandeira.toFixed(2)} <br>
+
+        Juros Totais: R$ ${juros.toFixed(2)} <br>
+
+        Taxa Mensal: R$ ${taxaMensal.toFixed(2)} <br>
+
+        Valor Total: R$ ${valorTotal.toFixed(2)} <br>
+
+        Valor de cada Parcela: 
+        R$ ${valorParcela.toFixed(2)}
+      `;
+    });
+  </script>
+
+</body>
+</html>
